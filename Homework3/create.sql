@@ -1,0 +1,33 @@
+use homework3;
+
+CREATE TABLE  salespeople
+(
+	snum INT PRIMARY KEY,
+    sname VARCHAR(20) NOT NULL,
+    city VARCHAR(25) NOT NULL,
+    comm DECIMAL(3, 2) NOT NULL
+);
+
+CREATE TABLE customers
+(
+	cnum INT PRIMARY KEY AUTO_INCREMENT,
+	cname VARCHAR(25) NOT NULL,
+	city VARCHAR(25) NOT NULL,
+	rating INT NOT NULL,
+	snum INT NOT NULL,
+	FOREIGN KEY (snum) REFERENCES salespeople(snum) ON DELETE CASCADE
+);
+
+CREATE TABLE orders
+(
+	onum INT PRIMARY KEY,
+	amt DECIMAL(7, 2) NOT NULL,
+	odate DATE NOT NULL,
+	cnum INT NOT NULL,
+	snum INT NOT NULL,
+	FOREIGN KEY (cnum) REFERENCES customers(cnum) ON DELETE CASCADE,
+	FOREIGN KEY (snum) REFERENCES salespeople(snum) ON DELETE CASCADE
+);
+
+
+
